@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Resina</title>
     <style>
@@ -45,8 +44,8 @@
 }
 
 .selected-prop {
-    background-color: #DDB700; /* Cambiar el color de fondo cuando est· seleccionado */
-    color: #fff; /* Cambiar el color del texto cuando est· seleccionado */
+    background-color: #DDB700; /* Cambiar el color de fondo cuando est√° seleccionado */
+    color: #fff; /* Cambiar el color del texto cuando est√° seleccionado */
 }
 
         .results {
@@ -80,9 +79,9 @@
         <input type="number" id="espesor" step="0.01">
     </div>
     <div class="proportions-container">
-        <button id="prop-1-1" class="proportion-btn">ProporciÛn 1-1 Manualidades</button>
-        <button id="prop-2-1" class="proportion-btn">ProporciÛn 2-1 Mesones</button>
-        <button id="prop-3-1" class="proportion-btn">ProporciÛn 3-1 Pisos</button>
+        <button id="prop-1-1" class="proportion-btn">Proporci√≥n 1-1 Manualidades</button>
+        <button id="prop-2-1" class="proportion-btn">Proporci√≥n 2-1 Mesones</button>
+        <button id="prop-3-1" class="proportion-btn">Proporci√≥n 3-1 Pisos</button>
     </div>
     <div class="results">
         <h2>Resultados</h2>
@@ -102,7 +101,7 @@
             // Calcular la cantidad de mezcla total (en kilogramos)
             const mezclaTotal = (metrosCuadrados * espesor);
 
-            // Calcular la cantidad de resina (A) y catalizador (B) seg˙n la proporciÛn seleccionada
+            // Calcular la cantidad de resina (A) y catalizador (B) seg√∫n la proporci√≥n seleccionada
             let resinaA, catalizadorB;
             if (selectedProportion === "prop-1-1") {
                 resinaA = mezclaTotal / 2;
@@ -118,14 +117,14 @@
             // Calcular la cantidad de pigmento necesario (3% del peso total)
             const pigmento = 0.03 * (resinaA + catalizadorB) * 1000;
 
-            // Actualizar los resultados en la p·gina
+            // Actualizar los resultados en la p√°gina
             document.getElementById("total-mezcla").textContent = mezclaTotal.toFixed(2);
             document.getElementById("resina-a").textContent = resinaA.toFixed(2);
             document.getElementById("catalizador-b").textContent = catalizadorB.toFixed(2);
             document.getElementById("pigmento").textContent = pigmento.toFixed(2);
         }
 
-        // Event listener para los botones de proporciÛn
+        // Event listener para los botones de proporci√≥n
         const proportionBtns = document.querySelectorAll(".proportion-btn");
 
         proportionBtns.forEach((btn) => {
@@ -138,7 +137,7 @@
             });
         });
 
-        // Inicializar con la proporciÛn 1-1 seleccionada
+        // Inicializar con la proporci√≥n 1-1 seleccionada
         document.getElementById("prop-1-1").click();
     </script>
 </body>
