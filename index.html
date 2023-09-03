@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Resina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .input-container {
+            margin: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 100px;
+            padding: 5px;
+        }
+
+        .proportions-container {
+            margin: 10px;
+        }
+
+        .proportion-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #FAD41B; /* Cambiar el color de fondo predeterminado */
+    border: none; /* Eliminar el borde */
+    border-radius: 20px; /* Hacer los botones redondeados */
+    color: #333; /* Cambiar el color del texto */
+}
+
+.selected-prop {
+    background-color: #DDB700; /* Cambiar el color de fondo cuando está seleccionado */
+    color: #fff; /* Cambiar el color del texto cuando está seleccionado */
+}
+
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .results h2 {
+            color: #333;
+        }
+	/* Estilos para los campos de texto */
+.input-container input {
+    width: 100px;
+    padding: 5px;
+    border: none; /* Eliminar el borde */
+    border-radius: 20px; /* Hacer los campos de texto redondeados */
+}
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Resina</h1>
+    <div class="input-container">
+        <label for="metros">Metros cuadrados (m2):</label>
+        <input type="number" id="metros" step="0.01">
+    </div>
+    <div class="input-container">
+        <label for="espesor">Espesor (mm):</label>
+        <input type="number" id="espesor" step="0.01">
+    </div>
+    <div class="proportions-container">
+        <button id="prop-1-1" class="proportion-btn">Proporción 1-1 Manualidades</button>
+        <button id="prop-2-1" class="proportion-btn">Proporción 2-1 Mesones</button>
+        <button id="prop-3-1" class="proportion-btn">Proporción 3-1 Pisos</button>
+    </div>
+    <div class="results">
+        <h2>Resultados</h2>
+        <p>Cantidad de mezcla total: <span id="total-mezcla"></span> kg</p>
+        <p>Cantidad de resina (A): <span id="resina-a"></span> kg</p>
+        <p>Cantidad de catalizador (B): <span id="catalizador-b"></span> kg</p>
+        <p>Cantidad de pigmento necesario: <span id="pigmento"></span> g</p>
+    </div>
+    <script>
+        // Event listener para calcular los resultados cuando se cambian los valores
+        function calcularResultados() {
+            // Obtener los valores ingresados
+            const metrosCuadrados = parseFloat(document.getElementById("metros").value);
+            const espesor = parseFloat(document.getElementById("espesor").value);
+            const selectedProportion = document.querySelector(".selected-prop").id;
+
+            // Calcular la cantidad de mezcla total (en kilogramos)
+            const mezclaTotal = (metrosCuadrados * espesor);
+
+            // Calcular la cantidad de resina (A) y catalizador (B) según la proporción seleccionada
+            let resinaA, catalizadorB;
+            if (selectedProportion === "prop-1-1") {
+                resinaA = mezclaTotal / 2;
+                catalizadorB = resinaA;
+            } else if (selectedProportion === "prop-2-1") {
+                resinaA = (2 / 3) * mezclaTotal;
+                catalizadorB = mezclaTotal / 3;
+            } else if (selectedProportion === "prop-3-1") {
+                resinaA = (3 / 4) * mezclaTotal;
+                catalizadorB = mezclaTotal / 4;
+            }
+
+            // Calcular la cantidad de pigmento necesario (3% del peso total)
+            const pigmento = 0.03 * (resinaA + catalizadorB) * 1000;
+
+            // Actualizar los resultados en la página
+            document.getElementById("total-mezcla").textContent = mezclaTotal.toFixed(2);
+            document.getElementById("resina-a").textContent = resinaA.toFixed(2);
+            document.getElementById("catalizador-b").textContent = catalizadorB.toFixed(2);
+            document.getElementById("pigmento").textContent = pigmento.toFixed(2);
+        }
+
+        // Event listener para los botones de proporción
+        const proportionBtns = document.querySelectorAll(".proportion-btn");
+
+        proportionBtns.forEach((btn) => {
+            btn.addEventListener("click", function () {
+                proportionBtns.forEach((btn) => {
+                    btn.classList.remove("selected-prop");
+                });
+                this.classList.add("selected-prop");
+                calcularResultados();
+            });
+        });
+
+        // Inicializar con la proporción 1-1 seleccionada
+        document.getElementById("prop-1-1").click();
+    </script>
+</body>
+</html>
