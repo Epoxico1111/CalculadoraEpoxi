@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
     <title>Calculadora de Resina</title>
     <style>
         body {
@@ -9,8 +10,9 @@
             text-align: center;
             background-color: #f0f0f0;
             padding: 20px;
+            margin: 0; /* Elimina los márgenes predeterminados */
+            padding: 0; /* Elimina el relleno predeterminado */
         }
-
         h1 {
             color: #333;
         }
@@ -41,12 +43,12 @@
     border: none; /* Eliminar el borde */
     border-radius: 20px; /* Hacer los botones redondeados */
     color: #333; /* Cambiar el color del texto */
-}
+    }
 
-.selected-prop {
-    background-color: #DDB700; /* Cambiar el color de fondo cuando está seleccionado */
-    color: #fff; /* Cambiar el color del texto cuando está seleccionado */
-}
+    .selected-prop {
+    background-color: #DDB700; /* Cambiar el color de fondo cuando est� seleccionado */
+    color: #fff; /* Cambiar el color del texto cuando est� seleccionado */
+    }
 
         .results {
             margin-top: 20px;
@@ -59,16 +61,51 @@
         .results h2 {
             color: #333;
         }
-	/* Estilos para los campos de texto */
-.input-container input {
+    /* Estilos para los campos de texto */
+    .input-container input {
     width: 100px;
     padding: 5px;
     border: none; /* Eliminar el borde */
     border-radius: 20px; /* Hacer los campos de texto redondeados */
-}
+    }
+    /* Estilos para la franja negra en la parte superior */
+    .header {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-family: 'Open Sans', sans-serif;
+            width: 100%;
+            margin: 0;
+            border: none;
+        }
+
+        /* Estilos para el título principal */
+        #titulo-principal {
+            font-weight: 800;
+            font-size: 24px;
+            color: #fff;
+            margin-left: 20px; /* Ajusta el espacio a la izquierda del título */
+            margin-right: 10px; /* Ajusta el espacio a la derecha del título */
+        }
+
+        /* Estilos para el subtítulo */
+        #subtitulo {
+            font-weight: 800;
+            font-size: 13px;
+            color: #FAD41B;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
+  <div class="header">
+      <h1 id="titulo-principal">EPOXICO11/11</h1>
+      <h2 id="subtitulo">CATALIZA TUS IDEAS</h2>
+  </div>
+    </div>
     <h1>Calculadora de Resina</h1>
     <div class="input-container">
         <label for="metros">Metros cuadrados (m2):</label>
@@ -79,9 +116,9 @@
         <input type="number" id="espesor" step="0.01">
     </div>
     <div class="proportions-container">
-        <button id="prop-1-1" class="proportion-btn">Proporción 1-1 Manualidades</button>
-        <button id="prop-2-1" class="proportion-btn">Proporción 2-1 Mesones</button>
-        <button id="prop-3-1" class="proportion-btn">Proporción 3-1 Pisos</button>
+        <button id="prop-1-1" class="proportion-btn">Proporción 1 - 1 Manualidades</button>
+        <button id="prop-2-1" class="proportion-btn">Proporción 2 - 1 Mesones</button>
+        <button id="prop-3-1" class="proportion-btn">Proporción 1 - 0.60 Pisos</button>
     </div>
     <div class="results">
         <h2>Resultados</h2>
@@ -101,7 +138,7 @@
             // Calcular la cantidad de mezcla total (en kilogramos)
             const mezclaTotal = (metrosCuadrados * espesor);
 
-            // Calcular la cantidad de resina (A) y catalizador (B) según la proporción seleccionada
+            // Calcular la cantidad de resina (A) y catalizador (B) segun la proporcion seleccionada
             let resinaA, catalizadorB;
             if (selectedProportion === "prop-1-1") {
                 resinaA = mezclaTotal / 2;
@@ -110,21 +147,21 @@
                 resinaA = (2 / 3) * mezclaTotal;
                 catalizadorB = mezclaTotal / 3;
             } else if (selectedProportion === "prop-3-1") {
-                resinaA = (3 / 4) * mezclaTotal;
-                catalizadorB = mezclaTotal / 4;
+                resinaA = (1 / 1.60) * mezclaTotal; // Cambio a 1 kg de resina y 0.60 kg de catalizador
+                catalizadorB = (0.60 / 1.60) * mezclaTotal;
             }
 
             // Calcular la cantidad de pigmento necesario (3% del peso total)
             const pigmento = 0.03 * (resinaA + catalizadorB) * 1000;
 
-            // Actualizar los resultados en la página
+            // Actualizar los resultados en la p�gina
             document.getElementById("total-mezcla").textContent = mezclaTotal.toFixed(2);
             document.getElementById("resina-a").textContent = resinaA.toFixed(2);
             document.getElementById("catalizador-b").textContent = catalizadorB.toFixed(2);
             document.getElementById("pigmento").textContent = pigmento.toFixed(2);
         }
 
-        // Event listener para los botones de proporción
+        // Event listener para los botones de proporcion
         const proportionBtns = document.querySelectorAll(".proportion-btn");
 
         proportionBtns.forEach((btn) => {
@@ -137,7 +174,7 @@
             });
         });
 
-        // Inicializar con la proporción 1-1 seleccionada
+        // Inicializar con la proporcion 1-1 seleccionada
         document.getElementById("prop-1-1").click();
     </script>
 </body>
